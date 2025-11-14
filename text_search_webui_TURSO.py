@@ -1,8 +1,8 @@
-    import os
-    import re
-    import libsql_client
-    from flask import Flask, render_template, request, jsonify
-    import sys
+import os
+import re
+import libsql_client
+from flask import Flask, render_template, request, jsonify
+import sys
 
     app = Flask(__name__)
 

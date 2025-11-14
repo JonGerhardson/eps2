@@ -1,3 +1,4 @@
 flask
 gunicorn
 libsql-client
+uvicorn

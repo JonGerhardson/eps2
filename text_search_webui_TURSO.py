@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-    """
-    Database-based Text Search Tool for Epstein Documents
-    Connects to a Turso cloud database.
-    """
-
     import os
     import re
     import libsql_client

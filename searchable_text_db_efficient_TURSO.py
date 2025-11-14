@@ -35,7 +35,7 @@ class TextSearchDatabase:
         if not TURSO_DB_URL or not TURSO_AUTH_TOKEN:
             raise ValueError("TURSO_DB_URL and TURSO_AUTH_TOKEN must be set as environment variables.")
         
-        self.client = libsql_client.create_client(
+        self.client = libsql_client.create_client_sync(
             url=TURSO_DB_URL,
             auth_token=TURSO_AUTH_TOKEN
         )
@@ -166,7 +166,7 @@ class TextSearchDatabase:
                 continue
         
         print(f"Indexing complete! Processed {total_files} files.")
-
+# ... (rest of the class is unchanged) ...
     def close(self):
         if self.client:
             self.client.close()
@@ -185,7 +185,22 @@ def main():
 
     db = TextSearchDatabase()
     db.create_tables()
-    db.index_text_files(TEXT_DIRECTORY)
+
+    # --- MODIFICATION ---
+    # Check for a special command-line argument to only test-upload one dir
+    if len(sys.argv) > 1 and sys.argv[1] == 'test-upload-001':
+        print("--- RUNNING IN TEST UPLOAD MODE FOR '001' ---")
+        test_dir = os.path.join(TEXT_DIRECTORY, "001")
+        if not os.path.isdir(test_dir):
+            print(f"Error: Test directory {test_dir} not found.")
+            sys.exit(1)
+        db.index_text_files(test_dir) # Run indexing only on the '001' subdir
+    else:
+        print("--- RUNNING IN FULL INDEX MODE ---")
+        # Original behavior: index all directories
+        db.index_text_files(TEXT_DIRECTORY)
+    # --- END MODIFICATION ---
+
     db.close()
     print("Data migration to Turso is complete.")
 

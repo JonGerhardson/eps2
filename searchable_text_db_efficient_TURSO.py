@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-    """
-    Highly optimized searchable database for text files.
-    This script populates a cloud-hosted Turso database.
-    It reads all local text files and uploads corresponding images
-    to a cloud storage (like Cloudflare R2).
-    """
-
     import os
     import glob
     import sys

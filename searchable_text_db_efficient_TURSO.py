@@ -1,9 +1,9 @@
-    import os
-    import glob
-    import sys
-    import libsql_client
-    import boto3 # For uploading images to R2
-    from typing import List, Tuple
+import os
+import glob
+import sys
+import libsql_client
+import boto3 # For uploading images to R2
+from typing import List, Tuple
 
     # --- R2/S3 Config (Set these) ---
     # Make sure these are set as environment variables for security
